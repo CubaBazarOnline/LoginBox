@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBO.com</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+    <meta name="theme-color" content="#0a0a12">
+    <meta name="description" content="Plataforma cubana para emprendedores y desarrolladores">
+    <link rel="manifest" href="/manifest.webmanifest">
+    <style>
+        :root {
+            --primary: #00ccff;
+            --secondary: #0066ff;
+            --dark: #0a0a12;
+            --light: #e0e0e0;
+            --gray: #a0a0a0;
+            --dark-gray: #303038;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        
+        .topdiv {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+            padding: 0 5%;
+        }
+        
+        .appicon {
+            width: 80px;
+            height: 80px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+            margin-right: 15px;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            font-weight: bold;
+        }
+        
+        .appname {
+            font-size: 22px;
+            margin: 0;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(0, 204, 255, 0.3);
+        }
+        
+        .appcredit {
+            font-size: 14px;
+            color: var(--primary);
+            margin: 5px 0 0 0;
+        }
+        
+        .apphorizontalinfo {
+            width: 100%;
+            margin-top: 25px;
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+        
+        .apphorizontalinfo p {
+            flex: 1;
+            margin: 0 10px;
+        }
+        
+        .install {
+            width: 90%;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            margin: 25px 5% 0;
+            border-radius: 8px;
+            padding: 12px;
+            border: none;
+            font-weight: bold;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 204, 255, 0.3);
+            transition: all 0.3s;
+        }
+        
+        .install:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(0, 204, 255, 0.5);
+        }
+        
+        .screenshots {
+            margin-top: 20px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            white-space: nowrap;
+            padding: 10px 5%;
+            scroll-snap-type: x mandatory;
+        }
+        
+        .screenshots::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .screenshot {
+            border-radius: 8px;
+            width: 280px;
+            height: 500px;
+            object-fit: cover;
+            display: inline-block;
+            margin-right: 10px;
+            border: 1px solid rgba(0, 204, 255, 0.3);
+            box-shadow: 0 0 10px rgba(0, 204, 255, 0.2);
+            scroll-snap-align: start;
+        }
+        
+        .divabouthisapp {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            margin-top: 30px;
+            cursor: pointer;
+        }
+        
+        .paboutthisapp {
+            font-size: 18px;
+            font-weight: bold;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0;
+        }
+        
+        .aboutthisapparrow {
+            font-size: 20px;
+            color: var(--primary);
+            transition: transform 0.3s;
+        }
+        
+        .divabouthisapp:hover .aboutthisapparrow {
+            transform: translateX(5px);
+        }
+        
+        .appshortabout {
+            padding: 0 5%;
+            color: var(--gray);
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        .category {
+            margin: 15px 5% 0;
+            background-color: transparent;
+            font-size: 14px;
+            border: 1px solid var(--primary);
+            border-radius: 10px;
+            padding: 8px 20px;
+            color: var(--primary);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .category:hover {
+            background-color: rgba(0, 204, 255, 0.1);
+        }
+        
+        .pratingandreviews {
+            font-size: 18px;
+            font-weight: bold;
+            padding: 0 5%;
+            margin: 40px 0 20px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Sección de comentarios simplificada */
+        .comments-container {
+            padding: 0 5%;
+        }
+        
+        .comment {
+            background-color: #1a1a24;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid var(--dark-gray);
+        }
+        
+        .comment-user {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .comment-text {
+            color: #c0c0c0;
+            font-size: 14px;
+        }
+        
+        .comment-date {
+            color: var(--gray);
+            font-size: 12px;
+            margin-top: 8px;
+        }
+        
+        .seeallreviews {
+            padding: 0 5%;
+            margin-top: 30px;
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 15px;
+            cursor: pointer;
+            text-align: center;
+            display: block;
+        }
+        
+        .similargamesh3 {
+            padding: 0 5%;
+            margin: 40px 0 20px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .similar-platforms {
+            overflow-x: auto;
+            overflow-y: hidden;
+            white-space: nowrap;
+            padding: 0 5% 20px;
+        }
+        
+        .similar-platforms::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .platform-card {
+            display: inline-block;
+            width: 120px;
+            margin-right: 15px;
+            vertical-align: top;
+        }
+        
+        .platform-icon {
+            width: 100%;
+            height: 120px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 204, 255, 0.2);
+            border: 1px solid rgba(0, 204, 255, 0.3);
+            object-fit: cover;
+        }
+        
+        .platform-name {
+            width: 100%;
+            margin: 10px 0 0;
+            text-align: center;
+            font-size: 14px;
+            white-space: normal;
+        }
+        
+        .platform-rating {
+            color: var(--gray);
+            font-size: 12px;
+        }
+        
+        /* Selector de idioma */
+        .language-selector {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+        
+        .language-btn {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 12px;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 204, 255, 0.5);
+        }
+        
+        /* Notificación */
+        .notification {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: #1a1a24;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            max-width: 300px;
+            display: none;
+            border-left: 4px solid var(--primary);
+            z-index: 100;
+        }
+        
+        @media (min-width: 768px) {
+            .topdiv {
+                padding: 0 10%;
+            }
+            
+            .screenshots {
+                padding: 10px 10%;
+            }
+            
+            .screenshot {
+                width: 400px;
+                height: 600px;
+            }
+            
+            .divabouthisapp,
+            .pratingandreviews,
+            .comments-container,
+            .similargamesh3,
+            .similar-platforms {
+                padding: 0 10%;
+            }
+            
+            .platform-card {
+                width: 150px;
+                margin-right: 20px;
+            }
+            
+            .platform-icon {
+                height: 150px;
+            }
+        }
+        
+        /* Animación para el botón de instalación */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 204, 255, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 204, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 204, 255, 0); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="topdiv">
+        <div class="appicon">🚀</div>
+        <div>
+            <p class="appname">CBO.com</p>
+            <p class="appcredit">Plataforma Cubana</p>
+        </div>
+    </div>
+    
+    <div class="apphorizontalinfo">
+        <p><b>4.0 ★</b><br><small>15k reviews</small></p>
+        <p><b>↓</b><br><small>5.2 MB</small></p>
+        <p><b>50+</b><br><small>Descargas</small></p>
+    </div>
+    
+    <button class="install pulse" id="installButton">Instalar</button>
+    
+    <div class="screenshots">
+        <img src="https://picsum.photos/400/600?random=1" class="screenshot" alt="Captura de pantalla 1">
+        <img src="https://picsum.photos/400/600?random=2" class="screenshot" alt="Captura de pantalla 2">
+        <img src="https://picsum.photos/400/600?random=3" class="screenshot" alt="Captura de pantalla 3">
+        <img src="https://picsum.photos/400/600?random=4" class="screenshot" alt="Captura de pantalla 4">
+    </div>
+    
+    <div class="divabouthisapp" onclick="toggleAbout()">
+        <p class="paboutthisapp" id="aboutTitle">Info</p>
+        <p class="aboutthisapparrow">→</p>
+    </div>
+    
+    <p class="appshortabout" id="aboutText">CBO.com fue creada a finales de noviembre de 2023 con el propósito de impulsar a emprendedores y desarrolladores cubanos. Nuestra plataforma ofrece herramientas innovadoras para facilitar la creación de proyectos tecnológicos, conectar profesionales y promover el desarrollo digital en Cuba.</p>
+    
+    <button class="category">Tecnología</button>
+    
+    <p class="pratingandreviews" id="ratingTitle">Calificaciones y reseñas</p>
+    
+    <div class="comments-container">
+        <div class="comment">
+            <div class="comment-user">Alexa Wilson ★★★★★</div>
+            <div class="comment-text">Plataforma increíble para emprendedores. Las herramientas de colaboración son excepcionales.</div>
+            <div class="comment-date">16/03/2025</div>
+        </div>
+        
+        <div class="comment">
+            <div class="comment-user">Dave Jones ★★★★★</div>
+            <div class="comment-text">Ha revolucionado mi forma de trabajar. La interfaz es intuitiva y poderosa.</div>
+            <div class="comment-date">22/01/2025</div>
+        </div>
+        
+        <div class="comment">
+            <div class="comment-user">Chris Brown ★★★★★</div>
+            <div class="comment-text">El soporte para desarrolladores cubanos es incomparable. ¡Gracias CBO.com!</div>
+            <div class="comment-date">05/05/2025</div>
+        </div>
+    </div>
+    
+    <p class="seeallreviews" id="seeAllReviews">Ver todas las reseñas</p>
+    
+    <h3 class="similargamesh3" id="similarPlatforms">Plataformas similares</h3>
+    
+    <div class="similar-platforms">
+        <div class="platform-card">
+            <img src="https://picsum.photos/150/150?random=5" class="platform-icon" alt="Platform X">
+            <p class="platform-name">Platform X<br><span class="platform-rating">4.5 ★</span></p>
+        </div>
+        <div class="platform-card">
+            <img src="https://picsum.photos/150/150?random=6" class="platform-icon" alt="Platform Y">
+            <p class="platform-name">Platform Y<br><span class="platform-rating">4.2 ★</span></p>
+        </div>
+        <div class="platform-card">
+            <img src="https://picsum.photos/150/150?random=7" class="platform-icon" alt="Platform Z">
+            <p class="platform-name">Platform Z<br><span class="platform-rating">4.7 ★</span></p>
+        </div>
+        <div class="platform-card">
+            <img src="https://picsum.photos/150/150?random=8" class="platform-icon" alt="Platform A">
+            <p class="platform-name">Platform A<br><span class="platform-rating">4.9 ★</span></p>
+        </div>
+    </div>
+
+    <!-- Notificación -->
+    <div class="notification" id="notification">
+        <div id="notificationMessage">Bienvenido a CBO.com</div>
+    </div>
+
+    <!-- Selector de idioma -->
+    <div class="language-selector">
+        <button class="language-btn" onclick="toggleLanguage()">ES/EN</button>
+    </div>
+
+    <script>
+        // Textos multiidioma
+        const translations = {
+            es: {
+                install: "Instalar",
+                aboutTitle: "Info",
+                aboutText: "CBO.com fue creada a finales de noviembre de 2023 con el propósito de impulsar a emprendedores y desarrolladores cubanos. Nuestra plataforma ofrece herramientas innovadoras para facilitar la creación de proyectos tecnológicos, conectar profesionales y promover el desarrollo digital en Cuba.",
+                category: "Tecnología",
+                ratingTitle: "Calificaciones y reseñas",
+                seeAllReviews: "Ver todas las reseñas",
+                similarPlatforms: "Plataformas similares",
+                welcome: "Bienvenido a CBO.com"
+            },
+            en: {
+                install: "Install",
+                aboutTitle: "About",
+                aboutText: "CBO.com was created in late November 2023 with the purpose of empowering Cuban entrepreneurs and developers. Our platform offers innovative tools to facilitate the creation of tech projects, connect professionals and promote digital development in Cuba.",
+                category: "Technology",
+                ratingTitle: "Ratings and reviews",
+                seeAllReviews: "See all reviews",
+                similarPlatforms: "Similar platforms",
+                welcome: "Welcome to CBO.com"
+            }
+        };
+
+        let currentLanguage = 'es';
+
+        // Función para cambiar idioma
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'es' ? 'en' : 'es';
+            updateTexts();
+            showNotification(translations[currentLanguage].welcome);
+        }
+
+        // Actualizar textos según idioma
+        function updateTexts() {
+            document.getElementById('installButton').textContent = translations[currentLanguage].install;
+            document.getElementById('aboutTitle').textContent = translations[currentLanguage].aboutTitle;
+            document.getElementById('aboutText').textContent = translations[currentLanguage].aboutText;
+            document.querySelector('.category').textContent = translations[currentLanguage].category;
+            document.getElementById('ratingTitle').textContent = translations[currentLanguage].ratingTitle;
+            document.getElementById('seeAllReviews').textContent = translations[currentLanguage].seeAllReviews;
+            document.getElementById('similarPlatforms').textContent = translations[currentLanguage].similarPlatforms;
+        }
+
+        // Mostrar notificación
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            document.getElementById('notificationMessage').textContent = message;
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        // Toggle about text
+        function toggleAbout() {
+            const aboutText = document.getElementById('aboutText');
+            aboutText.style.display = aboutText.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // Sistema de notificaciones avanzado
+        function requestNotificationPermission() {
+            if (!('Notification' in window)) {
+                console.log('Este navegador no soporta notificaciones');
+                return;
+            }
+            
+            Notification.requestPermission().then(permission => {
+                if (permission === 'granted') {
+                    showNotification(translations[currentLanguage].welcome);
+                    
+                    // Notificación periódica de ejemplo
+                    setTimeout(() => {
+                        showNotification(currentLanguage === 'es' ? 
+                            "¡Nuevas características disponibles!" : 
+                            "New features available!");
+                    }, 10000);
+                }
+            });
+        }
+
+        // Solicitar permisos avanzados
+        function requestAdvancedPermissions() {
+            // Permiso de notificaciones
+            requestNotificationPermission();
+            
+            // Permiso de geolocalización
+            if ('geolocation' in navigator) {
+                navigator.geolocation.getCurrentPosition(
+                    () => console.log('Permiso de ubicación concedido'),
+                    () => console.log('Permiso de ubicación denegado')
+                );
+            }
+            
+            // Permiso de almacenamiento persistente
+            if ('storage' in navigator && 'persist' in navigator.storage) {
+                navigator.storage.persist()
+                    .then(granted => console.log('Persistencia de almacenamiento:', granted));
+            }
+            
+            // Otros permisos podrían solicitarse aquí
+            console.log('Solicitando permisos avanzados...');
+        }
+
+        // PWA Installation
+        let deferredPrompt;
+        const installButton = document.getElementById('installButton');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installButton.textContent = translations[currentLanguage].install;
+            installButton.classList.add('pulse');
+            
+            installButton.addEventListener('click', async () => {
+                installButton.classList.remove('pulse');
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log(`User response to the install prompt: ${outcome}`);
+                deferredPrompt = null;
+            });
+        });
+
+        window.addEventListener('appinstalled', () => {
+            installButton.style.display = 'none';
+            deferredPrompt = null;
+            console.log('PWA was installed');
+        });
+
+        // Al cargar la página
+        window.addEventListener('load', () => {
+            if (window.matchMedia('(display-mode: standalone)').matches) {
+                installButton.style.display = 'none';
+            }
+            
+            // Solicitar permisos al cargar
+            requestAdvancedPermissions();
+            
+            // Mostrar notificación de bienvenida
+            showNotification(translations[currentLanguage].welcome);
+        });
+
+        // Fallback para navegadores que no soportan PWA
+        if (!window.Promise) {
+            installButton.onclick = function() {
+                alert(translations[currentLanguage].install);
+                window.open("https://cbo.com/install", "_blank");
+            };
+        }
+    </script>
+</body>
+</html>
