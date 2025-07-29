@@ -1,598 +1,119 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CBO.com</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
-    <meta name="theme-color" content="#0a0a12">
-    <meta name="description" content="Plataforma cubana para emprendedores y desarrolladores">
-    <link rel="manifest" href="/manifest.webmanifest">
-    <style>
-        :root {
-            --primary: #00ccff;
-            --secondary: #0066ff;
-            --dark: #0a0a12;
-            --light: #e0e0e0;
-            --gray: #a0a0a0;
-            --dark-gray: #303038;
-        }
-        
-        * {
-            box-sizing: border-box;
-        }
-        
-        body {
-            background-color: var(--dark);
-            color: var(--light);
-            font-family: 'Segoe UI', Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-        }
-        
-        .topdiv {
-            display: flex;
-            align-items: center;
-            margin-top: 20px;
-            padding: 0 5%;
-        }
-        
-        .appicon {
-            width: 80px;
-            height: 80px;
-            border-radius: 15px;
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
-            margin-right: 15px;
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 40px;
-            font-weight: bold;
-        }
-        
-        .appname {
-            font-size: 22px;
-            margin: 0;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 10px rgba(0, 204, 255, 0.3);
-        }
-        
-        .appcredit {
-            font-size: 14px;
-            color: var(--primary);
-            margin: 5px 0 0 0;
-        }
-        
-        .apphorizontalinfo {
-            width: 100%;
-            margin-top: 25px;
-            display: flex;
-            justify-content: space-around;
-            text-align: center;
-        }
-        
-        .apphorizontalinfo p {
-            flex: 1;
-            margin: 0 10px;
-        }
-        
-        .install {
-            width: 90%;
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
-            margin: 25px 5% 0;
-            border-radius: 8px;
-            padding: 12px;
-            border: none;
-            font-weight: bold;
-            color: #fff;
-            font-size: 16px;
-            cursor: pointer;
-            box-shadow: 0 0 15px rgba(0, 204, 255, 0.3);
-            transition: all 0.3s;
-        }
-        
-        .install:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 20px rgba(0, 204, 255, 0.5);
-        }
-        
-        .screenshots {
-            margin-top: 20px;
-            overflow-x: auto;
-            overflow-y: hidden;
-            white-space: nowrap;
-            padding: 10px 5%;
-            scroll-snap-type: x mandatory;
-        }
-        
-        .screenshots::-webkit-scrollbar {
-            display: none;
-        }
-        
-        .screenshot {
-            border-radius: 8px;
-            width: 280px;
-            height: 500px;
-            object-fit: cover;
-            display: inline-block;
-            margin-right: 10px;
-            border: 1px solid rgba(0, 204, 255, 0.3);
-            box-shadow: 0 0 10px rgba(0, 204, 255, 0.2);
-            scroll-snap-align: start;
-        }
-        
-        .divabouthisapp {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 5%;
-            margin-top: 30px;
-            cursor: pointer;
-        }
-        
-        .paboutthisapp {
-            font-size: 18px;
-            font-weight: bold;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin: 0;
-        }
-        
-        .aboutthisapparrow {
-            font-size: 20px;
-            color: var(--primary);
-            transition: transform 0.3s;
-        }
-        
-        .divabouthisapp:hover .aboutthisapparrow {
-            transform: translateX(5px);
-        }
-        
-        .appshortabout {
-            padding: 0 5%;
-            color: var(--gray);
-            font-size: 14px;
-            margin-top: 10px;
-        }
-        
-        .category {
-            margin: 15px 5% 0;
-            background-color: transparent;
-            font-size: 14px;
-            border: 1px solid var(--primary);
-            border-radius: 10px;
-            padding: 8px 20px;
-            color: var(--primary);
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .category:hover {
-            background-color: rgba(0, 204, 255, 0.1);
-        }
-        
-        .pratingandreviews {
-            font-size: 18px;
-            font-weight: bold;
-            padding: 0 5%;
-            margin: 40px 0 20px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        /* Sección de comentarios simplificada */
-        .comments-container {
-            padding: 0 5%;
-        }
-        
-        .comment {
-            background-color: #1a1a24;
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 15px;
-            border: 1px solid var(--dark-gray);
-        }
-        
-        .comment-user {
-            font-weight: bold;
-            color: var(--primary);
-            margin-bottom: 5px;
-        }
-        
-        .comment-text {
-            color: #c0c0c0;
-            font-size: 14px;
-        }
-        
-        .comment-date {
-            color: var(--gray);
-            font-size: 12px;
-            margin-top: 8px;
-        }
-        
-        .seeallreviews {
-            padding: 0 5%;
-            margin-top: 30px;
-            font-weight: bold;
-            color: var(--primary);
-            font-size: 15px;
-            cursor: pointer;
-            text-align: center;
-            display: block;
-        }
-        
-        .similargamesh3 {
-            padding: 0 5%;
-            margin: 40px 0 20px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .similar-platforms {
-            overflow-x: auto;
-            overflow-y: hidden;
-            white-space: nowrap;
-            padding: 0 5% 20px;
-        }
-        
-        .similar-platforms::-webkit-scrollbar {
-            display: none;
-        }
-        
-        .platform-card {
-            display: inline-block;
-            width: 120px;
-            margin-right: 15px;
-            vertical-align: top;
-        }
-        
-        .platform-icon {
-            width: 100%;
-            height: 120px;
-            border-radius: 15px;
-            box-shadow: 0 0 10px rgba(0, 204, 255, 0.2);
-            border: 1px solid rgba(0, 204, 255, 0.3);
-            object-fit: cover;
-        }
-        
-        .platform-name {
-            width: 100%;
-            margin: 10px 0 0;
-            text-align: center;
-            font-size: 14px;
-            white-space: normal;
-        }
-        
-        .platform-rating {
-            color: var(--gray);
-            font-size: 12px;
-        }
-        
-        /* Selector de idioma */
-        .language-selector {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 100;
-        }
-        
-        .language-btn {
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 12px;
-            cursor: pointer;
-            box-shadow: 0 0 10px rgba(0, 204, 255, 0.5);
-        }
-        
-        /* Notificación */
-        .notification {
-            position: fixed;
-            bottom: 80px;
-            right: 20px;
-            background: #1a1a24;
-            color: white;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-            max-width: 300px;
-            display: none;
-            border-left: 4px solid var(--primary);
-            z-index: 100;
-        }
-        
-        @media (min-width: 768px) {
-            .topdiv {
-                padding: 0 10%;
-            }
-            
-            .screenshots {
-                padding: 10px 10%;
-            }
-            
-            .screenshot {
-                width: 400px;
-                height: 600px;
-            }
-            
-            .divabouthisapp,
-            .pratingandreviews,
-            .comments-container,
-            .similargamesh3,
-            .similar-platforms {
-                padding: 0 10%;
-            }
-            
-            .platform-card {
-                width: 150px;
-                margin-right: 20px;
-            }
-            
-            .platform-icon {
-                height: 150px;
-            }
-        }
-        
-        /* Animación para el botón de instalación */
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(0, 204, 255, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(0, 204, 255, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(0, 204, 255, 0); }
-        }
-        
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex,nofollow">
+<title>Sistema de Login Inteligente</title>
+<link rel="preconnect" href="https://www.appcreator24.com">
+<link rel="dns-prefetch" href="https://www.appcreator24.com">
+<link rel="preload" href="https://www.appcreator24.com/login_subcli.php" as="document">
+<style>
+:root{--primary-color:#2c3e50;--secondary-color:#3498db;--error-color:#e74c3c;--success-color:#2ecc71;--warning-color:#f39c12;--info-color:#1abc9c;--breakpoint-mobile:576px;--breakpoint-tablet:768px;--breakpoint-desktop:992px;}
+body{margin:0;padding:0;font-family:'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Open Sans','Helvetica Neue',sans-serif;background-color:#f5f7fa;color:#333;line-height:1.6;}
+.loading-container{display:flex;justify-content:center;align-items:center;height:100vh;background:linear-gradient(135deg,var(--primary-color),var(--secondary-color));flex-direction:column;transition:opacity .5s ease;}
+.spinner{width:50px;height:50px;border:5px solid rgba(255,255,255,.3);border-radius:50%;border-top-color:#fff;animation:spin 1s ease-in-out infinite;margin-bottom:20px;}
+.loading-text{color:#fff;text-align:center;max-width:300px;font-size:1.1rem;margin-bottom:1rem;}
+@keyframes spin{to{transform:rotate(360deg);}}
+#login-frame{width:100%;height:100vh;border:none;display:none;}
+.error-message{display:none;text-align:center;padding:20px;color:#fff;background-color:var(--error-color);position:fixed;top:0;left:0;right:0;z-index:1002;}
+@media (max-width:768px){.loading-container{background:var(--primary-color);padding:0 20px;}.spinner{width:40px;height:40px;}.loading-text{font-size:1rem;}}
+.floating-toolbox{position:fixed;bottom:20px;right:20px;display:flex;flex-direction:column;align-items:flex-end;gap:10px;z-index:1001;transition:all .3s ease;cursor:move;user-select:none;opacity:.9;transition:opacity .2s ease;}
+.floating-toolbox:hover{opacity:1;}
+.toolbox-main-btn{width:56px;height:56px;border-radius:50%;background-color:var(--toolbox-color,var(--secondary-color));color:#fff;border:none;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.2);display:flex;justify-content:center;align-items:center;transition:all .3s ease;z-index:1002;}
+.toolbox-main-btn:hover,.toolbox-main-btn:focus{transform:scale(1.1);outline:none;}
+.toolbox-main-btn i{font-size:24px;transition:transform .3s ease;}
+.toolbox-main-btn.collapsed i{transform:rotate(0);}
+.toolbox-main-btn.expanded i{transform:rotate(45deg);}
+.toolbox-options{display:flex;flex-direction:column;gap:10px;transform:translateY(20px);opacity:0;visibility:hidden;transition:all .3s ease;pointer-events:none;}
+.toolbox-options.visible{transform:translateY(0);opacity:1;visibility:visible;pointer-events:all;}
+.toolbox-btn{padding:12px 18px;background-color:var(--toolbox-color,var(--secondary-color));color:#fff;border:none;border-radius:28px;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.2);display:flex;align-items:center;gap:8px;transition:all .3s ease;font-size:.9rem;width:max-content;max-width:200px;}
+.toolbox-btn:hover,.toolbox-btn:focus{transform:translateY(-2px);outline:none;}
+.toolbox-btn i{font-size:16px;}
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background-color:rgba(0,0,0,.7);display:none;justify-content:center;align-items:center;z-index:1003;}
+.modal-content{background-color:#fff;padding:25px;border-radius:8px;width:90%;max-width:500px;box-shadow:0 5px 20px rgba(0,0,0,.4);}
+.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
+.modal-title{font-size:1.5rem;color:var(--primary-color);margin:0;}
+.modal-close{background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--error-color);padding:5px;}
+.modal-body{margin-bottom:20px;}
+.modal-footer{display:flex;justify-content:flex-end;gap:10px;}
+.modal-btn{padding:10px 18px;border-radius:4px;cursor:pointer;border:none;font-size:.9rem;transition:all .2s ease;}
+.modal-btn-primary{background-color:var(--secondary-color);color:#fff;}
+.modal-btn-primary:hover,.modal-btn-primary:focus{background-color:#2980b9;outline:none;}
+.modal-btn-secondary{background-color:#f0f0f0;color:#333;}
+.modal-btn-secondary:hover,.modal-btn-secondary:focus{background-color:#e0e0e0;outline:none;}
+.progress-container{width:100%;height:8px;background-color:rgba(255,255,255,.2);border-radius:4px;margin-top:20px;overflow:hidden;max-width:300px;}
+.progress-bar{height:100%;background-color:#fff;width:0%;transition:width .4s ease;border-radius:4px;}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0;}
+.form-control{width:100%;padding:10px;margin:8px 0;border:1px solid #ddd;border-radius:4px;font-size:1rem;transition:border .3s ease;}
+.form-control:focus{border-color:var(--secondary-color);outline:none;box-shadow:0 0 0 2px rgba(52,152,219,.2);}
+.form-group{margin-bottom:15px;}
+.form-group label{display:block;margin-bottom:5px;font-weight:500;}
+@media (max-width:768px){.floating-toolbox{bottom:15px;right:15px;}.toolbox-main-btn{width:50px;height:50px;}.toolbox-btn{padding:10px 15px;font-size:.85rem;}}
+@media (max-width:480px){.floating-toolbox{bottom:10px;right:10px;}.toolbox-main-btn{width:46px;height:46px;}.toolbox-main-btn i{font-size:20px;}.toolbox-btn{padding:8px 12px;font-size:.8rem;max-width:160px;}}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <div class="topdiv">
-        <div class="appicon">🚀</div>
-        <div>
-            <p class="appname">CBO.com</p>
-            <p class="appcredit">Plataforma Cubana</p>
-        </div>
-    </div>
-    
-    <div class="apphorizontalinfo">
-        <p><b>4.0 ★</b><br><small>15k reviews</small></p>
-        <p><b>↓</b><br><small>5.2 MB</small></p>
-        <p><b>50+</b><br><small>Descargas</small></p>
-    </div>
-    
-    <button class="install pulse" id="installButton">Instalar</button>
-    
-    <div class="screenshots">
-        <img src="https://picsum.photos/400/600?random=1" class="screenshot" alt="Captura de pantalla 1">
-        <img src="https://picsum.photos/400/600?random=2" class="screenshot" alt="Captura de pantalla 2">
-        <img src="https://picsum.photos/400/600?random=3" class="screenshot" alt="Captura de pantalla 3">
-        <img src="https://picsum.photos/400/600?random=4" class="screenshot" alt="Captura de pantalla 4">
-    </div>
-    
-    <div class="divabouthisapp" onclick="toggleAbout()">
-        <p class="paboutthisapp" id="aboutTitle">Info</p>
-        <p class="aboutthisapparrow">→</p>
-    </div>
-    
-    <p class="appshortabout" id="aboutText">CBO.com fue creada a finales de noviembre de 2023 con el propósito de impulsar a emprendedores y desarrolladores cubanos. Nuestra plataforma ofrece herramientas innovadoras para facilitar la creación de proyectos tecnológicos, conectar profesionales y promover el desarrollo digital en Cuba.</p>
-    
-    <button class="category">Tecnología</button>
-    
-    <p class="pratingandreviews" id="ratingTitle">Calificaciones y reseñas</p>
-    
-    <div class="comments-container">
-        <div class="comment">
-            <div class="comment-user">Alexa Wilson ★★★★★</div>
-            <div class="comment-text">Plataforma increíble para emprendedores. Las herramientas de colaboración son excepcionales.</div>
-            <div class="comment-date">16/03/2025</div>
-        </div>
-        
-        <div class="comment">
-            <div class="comment-user">Dave Jones ★★★★★</div>
-            <div class="comment-text">Ha revolucionado mi forma de trabajar. La interfaz es intuitiva y poderosa.</div>
-            <div class="comment-date">22/01/2025</div>
-        </div>
-        
-        <div class="comment">
-            <div class="comment-user">Chris Brown ★★★★★</div>
-            <div class="comment-text">El soporte para desarrolladores cubanos es incomparable. ¡Gracias CBO.com!</div>
-            <div class="comment-date">05/05/2025</div>
-        </div>
-    </div>
-    
-    <p class="seeallreviews" id="seeAllReviews">Ver todas las reseñas</p>
-    
-    <h3 class="similargamesh3" id="similarPlatforms">Plataformas similares</h3>
-    
-    <div class="similar-platforms">
-        <div class="platform-card">
-            <img src="https://picsum.photos/150/150?random=5" class="platform-icon" alt="Platform X">
-            <p class="platform-name">Platform X<br><span class="platform-rating">4.5 ★</span></p>
-        </div>
-        <div class="platform-card">
-            <img src="https://picsum.photos/150/150?random=6" class="platform-icon" alt="Platform Y">
-            <p class="platform-name">Platform Y<br><span class="platform-rating">4.2 ★</span></p>
-        </div>
-        <div class="platform-card">
-            <img src="https://picsum.photos/150/150?random=7" class="platform-icon" alt="Platform Z">
-            <p class="platform-name">Platform Z<br><span class="platform-rating">4.7 ★</span></p>
-        </div>
-        <div class="platform-card">
-            <img src="https://picsum.photos/150/150?random=8" class="platform-icon" alt="Platform A">
-            <p class="platform-name">Platform A<br><span class="platform-rating">4.9 ★</span></p>
-        </div>
-    </div>
-
-    <!-- Notificación -->
-    <div class="notification" id="notification">
-        <div id="notificationMessage">Bienvenido a CBO.com</div>
-    </div>
-
-    <!-- Selector de idioma -->
-    <div class="language-selector">
-        <button class="language-btn" onclick="toggleLanguage()">ES/EN</button>
-    </div>
-
-    <script>
-        // Textos multiidioma
-        const translations = {
-            es: {
-                install: "Instalar",
-                aboutTitle: "Info",
-                aboutText: "CBO.com fue creada a finales de noviembre de 2023 con el propósito de impulsar a emprendedores y desarrolladores cubanos. Nuestra plataforma ofrece herramientas innovadoras para facilitar la creación de proyectos tecnológicos, conectar profesionales y promover el desarrollo digital en Cuba.",
-                category: "Tecnología",
-                ratingTitle: "Calificaciones y reseñas",
-                seeAllReviews: "Ver todas las reseñas",
-                similarPlatforms: "Plataformas similares",
-                welcome: "Bienvenido a CBO.com"
-            },
-            en: {
-                install: "Install",
-                aboutTitle: "About",
-                aboutText: "CBO.com was created in late November 2023 with the purpose of empowering Cuban entrepreneurs and developers. Our platform offers innovative tools to facilitate the creation of tech projects, connect professionals and promote digital development in Cuba.",
-                category: "Technology",
-                ratingTitle: "Ratings and reviews",
-                seeAllReviews: "See all reviews",
-                similarPlatforms: "Similar platforms",
-                welcome: "Welcome to CBO.com"
-            }
-        };
-
-        let currentLanguage = 'es';
-
-        // Función para cambiar idioma
-        function toggleLanguage() {
-            currentLanguage = currentLanguage === 'es' ? 'en' : 'es';
-            updateTexts();
-            showNotification(translations[currentLanguage].welcome);
-        }
-
-        // Actualizar textos según idioma
-        function updateTexts() {
-            document.getElementById('installButton').textContent = translations[currentLanguage].install;
-            document.getElementById('aboutTitle').textContent = translations[currentLanguage].aboutTitle;
-            document.getElementById('aboutText').textContent = translations[currentLanguage].aboutText;
-            document.querySelector('.category').textContent = translations[currentLanguage].category;
-            document.getElementById('ratingTitle').textContent = translations[currentLanguage].ratingTitle;
-            document.getElementById('seeAllReviews').textContent = translations[currentLanguage].seeAllReviews;
-            document.getElementById('similarPlatforms').textContent = translations[currentLanguage].similarPlatforms;
-        }
-
-        // Mostrar notificación
-        function showNotification(message) {
-            const notification = document.getElementById('notification');
-            document.getElementById('notificationMessage').textContent = message;
-            notification.style.display = 'block';
-            setTimeout(() => {
-                notification.style.display = 'none';
-            }, 3000);
-        }
-
-        // Toggle about text
-        function toggleAbout() {
-            const aboutText = document.getElementById('aboutText');
-            aboutText.style.display = aboutText.style.display === 'none' ? 'block' : 'none';
-        }
-
-        // Sistema de notificaciones avanzado
-        function requestNotificationPermission() {
-            if (!('Notification' in window)) {
-                console.log('Este navegador no soporta notificaciones');
-                return;
-            }
-            
-            Notification.requestPermission().then(permission => {
-                if (permission === 'granted') {
-                    showNotification(translations[currentLanguage].welcome);
-                    
-                    // Notificación periódica de ejemplo
-                    setTimeout(() => {
-                        showNotification(currentLanguage === 'es' ? 
-                            "¡Nuevas características disponibles!" : 
-                            "New features available!");
-                    }, 10000);
-                }
-            });
-        }
-
-        // Solicitar permisos avanzados
-        function requestAdvancedPermissions() {
-            // Permiso de notificaciones
-            requestNotificationPermission();
-            
-            // Permiso de geolocalización
-            if ('geolocation' in navigator) {
-                navigator.geolocation.getCurrentPosition(
-                    () => console.log('Permiso de ubicación concedido'),
-                    () => console.log('Permiso de ubicación denegado')
-                );
-            }
-            
-            // Permiso de almacenamiento persistente
-            if ('storage' in navigator && 'persist' in navigator.storage) {
-                navigator.storage.persist()
-                    .then(granted => console.log('Persistencia de almacenamiento:', granted));
-            }
-            
-            // Otros permisos podrían solicitarse aquí
-            console.log('Solicitando permisos avanzados...');
-        }
-
-        // PWA Installation
-        let deferredPrompt;
-        const installButton = document.getElementById('installButton');
-
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            installButton.textContent = translations[currentLanguage].install;
-            installButton.classList.add('pulse');
-            
-            installButton.addEventListener('click', async () => {
-                installButton.classList.remove('pulse');
-                deferredPrompt.prompt();
-                const { outcome } = await deferredPrompt.userChoice;
-                console.log(`User response to the install prompt: ${outcome}`);
-                deferredPrompt = null;
-            });
-        });
-
-        window.addEventListener('appinstalled', () => {
-            installButton.style.display = 'none';
-            deferredPrompt = null;
-            console.log('PWA was installed');
-        });
-
-        // Al cargar la página
-        window.addEventListener('load', () => {
-            if (window.matchMedia('(display-mode: standalone)').matches) {
-                installButton.style.display = 'none';
-            }
-            
-            // Solicitar permisos al cargar
-            requestAdvancedPermissions();
-            
-            // Mostrar notificación de bienvenida
-            showNotification(translations[currentLanguage].welcome);
-        });
-
-        // Fallback para navegadores que no soportan PWA
-        if (!window.Promise) {
-            installButton.onclick = function() {
-                alert(translations[currentLanguage].install);
-                window.open("https://cbo.com/install", "_blank");
-            };
-        }
-    </script>
+<div class="loading-container" id="loading" role="status" aria-live="polite">
+<div class="spinner" aria-hidden="true"></div>
+<div class="loading-text" id="loading-text">Cargando sistema de login...</div>
+<div class="progress-container"><div class="progress-bar" id="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div></div>
+<span class="sr-only">Cargando aplicación, por favor espere...</span>
+</div>
+<div class="error-message" id="error-message" role="alert">
+<h2>Error al cargar el sistema de login</h2>
+<p>Estamos experimentando problemas técnicos. Por favor, inténtelo de nuevo más tarde.</p>
+<button onclick="reintentarCarga()" class="toolbox-btn">Reintentar</button>
+</div>
+<iframe id="login-frame" src="https://www.appcreator24.com/login_subcli.php" title="Sistema de Login" allow="autoplay; fullscreen" referrerpolicy="strict-origin-when-cross-origin" sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-modals" aria-label="Formulario de inicio de sesión" loading="eager"></iframe>
+<div class="floating-toolbox" id="floatingToolbox">
+<button class="toolbox-main-btn collapsed" id="toolboxMainBtn" aria-label="Mostrar herramientas" aria-expanded="false"><i class="fas fa-tools"></i></button>
+<div class="toolbox-options" id="toolboxOptions">
+<button class="toolbox-btn" id="autoFillBtn" title="Autocompletar credenciales" aria-label="Autocompletar credenciales"><i class="fas fa-key" aria-hidden="true"></i> Autocompletar</button>
+<button class="toolbox-btn" id="externalNavBtn" title="Navegar a otra web" aria-label="Abrir navegación externa"><i class="fas fa-external-link-alt" aria-hidden="true"></i> Navegar</button>
+<button class="toolbox-btn" id="colorChangeBtn" title="Cambiar color" aria-label="Cambiar color del toolbox"><i class="fas fa-palette" aria-hidden="true"></i> Color</button>
+<button class="toolbox-btn" id="opacityBtn" title="Ajustar transparencia" aria-label="Ajustar transparencia del toolbox"><i class="fas fa-adjust" aria-hidden="true"></i> Transparencia</button>
+</div>
+</div>
+<div class="modal-overlay" id="externalNavModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+<div class="modal-content">
+<div class="modal-header">
+<h3 class="modal-title" id="modalTitle">Navegación Externa</h3>
+<button class="modal-close" id="modalClose" aria-label="Cerrar modal">&times;</button>
+</div>
+<div class="modal-body">
+<p>Está a punto de salir del sistema de login. ¿Desea continuar?</p>
+<div class="form-group">
+<label for="externalUrl">URL de destino:</label>
+<input type="url" id="externalUrl" class="form-control" placeholder="https://ejemplo.com" required pattern="https?://.+" title="La URL debe comenzar con http:// o https://">
+<div id="urlSuggestions" class="suggestions-container" style="display:none;"></div>
+</div>
+</div>
+<div class="modal-footer">
+<button class="modal-btn modal-btn-secondary" id="cancelNav">Cancelar</button>
+<button class="modal-btn modal-btn-primary" id="confirmNav">Aceptar</button>
+</div>
+</div>
+</div>
+<script>
+const CONFIG={TIMEOUT_CARGA:10000,CREDENCIALES:{email:'afiliado@gmail.com',password:'1234'},URLS_PREFETCH:['/dashboard.css','/main.js','https://www.appcreator24.com/assets/login.css'],INTELIGENCIA:{intentosMaximos:3,delayEntreIntentos:2000,umbralRendimiento:3000,sugerenciasURL:['https://www.google.com','https://www.github.com','https://www.appcreator24.com/ayuda']},DOMINIOS_PERMITIDOS:['appcreator24.com','google.com','github.com'],COLORES_TOOLBOX:['#3498db','#e74c3c','#2ecc71','#f39c12','#9b59b6','#1abc9c']};
+const APP_STATE={timeoutId:null,intentosAutocompletado:0,recursosCargados:0,recursosTotales:1,performanceMetrics:{startTime:null,loadTime:null,velocidadConexion:null,memoriaUsada:null},urlHistory:JSON.parse(localStorage.getItem('urlHistory'))||[],toolboxExpanded:false,toolboxColorIndex:0,toolboxDragging:false,toolboxOffset:{x:0,y:0},toolboxOpacity:0.9};
+document.addEventListener('DOMContentLoaded',function(){iniciarCargaInteligente();configurarControles();detectarVelocidadConexion();iniciarMedicionMemoria();if('IntersectionObserver'in window){const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){cargarRecursosAdelantados();observer.disconnect();}});},{threshold:0.1});observer.observe(document.getElementById('login-frame'));}const iframe=document.getElementById('login-frame');iframe.addEventListener('load',iframeCargado);iframe.addEventListener('error',errorCarga);configurarToolbox();});
+function iniciarCargaInteligente(){APP_STATE.performanceMetrics.startTime=performance.now();APP_STATE.timeoutId=setTimeout(()=>{if(document.getElementById('loading').style.display!=='none'){manejarErrorCarga();document.getElementById('loading-text').textContent="La carga está tardando más de lo esperado...";}},CONFIG.TIMEOUT_CARGA);simularProgresoCarga();if('performance'in window){performance.mark('login_start');}if('connection'in navigator&&navigator.connection.saveData){console.log("Modo de ahorro de datos detectado, optimizando carga...");}}
+function simularProgresoCarga(){let progreso=0;const textosCarga=[{min:0,max:25,text:"Inicializando componentes de seguridad..."},{min:25,max:50,text:"Cargando recursos esenciales..."},{min:50,max:75,text:"Optimizando interfaz de usuario..."},{min:75,max:90,text:"Preparando sistema de autenticación..."},{min:90,max:100,text:"¡Casi listo!..."}];const intervalo=setInterval(()=>{progreso+=Math.random()*(10-(progreso/15));if(progreso>=95){clearInterval(intervalo);return;}const progressBar=document.getElementById('progress-bar');progressBar.style.width=`${progreso}%`;progressBar.setAttribute('aria-valuenow',Math.round(progreso));const textoActual=textosCarga.find(t=>progreso>=t.min&&progreso<t.max);if(textoActual){document.getElementById('loading-text').textContent=textoActual.text;}},300);}
+function iframeCargado(){clearTimeout(APP_STATE.timeoutId);const loading=document.getElementById('loading');loading.style.opacity='0';setTimeout(()=>{loading.style.display='none';document.getElementById('login-frame').style.display='block';},500);document.getElementById('progress-bar').style.width='100%';document.getElementById('progress-bar').setAttribute('aria-valuenow',100);if('performance'in window){performance.mark('login_loaded');performance.measure('login_load_time','login_start','login_loaded');const measure=performance.getEntriesByName('login_load_time')[0];APP_STATE.performanceMetrics.loadTime=measure.duration;console.log('Métricas de carga:',{tiempoTotal:measure.duration+'ms',velocidadConexion:APP_STATE.performanceMetrics.velocidadConexion,memoriaUsada:APP_STATE.performanceMetrics.memoriaUsada});}window.addEventListener('message',manejarMensajes);if(APP_STATE.performanceMetrics.loadTime<CONFIG.INTELIGENCIA.umbralRendimiento){setTimeout(()=>{autoCompletarCredenciales();},500);}}
+function manejarErrorCarga(){clearTimeout(APP_STATE.timeoutId);const loading=document.getElementById('loading');loading.style.opacity='0';setTimeout(()=>{loading.style.display='none';document.getElementById('error-message').style.display='block';},500);if('ga'in window){ga('send','event','Error','Login Load Failed',APP_STATE.performanceMetrics.velocidadConexion);}}
+function reintentarCarga(){document.getElementById('error-message').style.display='none';const loading=document.getElementById('loading');loading.style.display='flex';setTimeout(()=>{loading.style.opacity='1';},10);document.getElementById('login-frame').src=`https://www.appcreator24.com/login_subcli.php?retry=${Date.now()}`;APP_STATE.timeoutId=setTimeout(()=>{if(document.getElementById('loading').style.display!=='none'){manejarErrorCarga();}},CONFIG.TIMEOUT_CARGA);}
+function manejarMensajes(event){const allowedOrigins=['https://www.appcreator24.com','https://appcreator24.com'];if(!allowedOrigins.includes(event.origin))return;try{const data=JSON.parse(event.data);if(data.type==='login_success'){window.location.href=data.redirectUrl||'/dashboard';}if(data.type==='login_error'){console.error('Error de login:',data.message);if(data.message&&(data.message.includes('contraseña')||data.message.includes('credenciales'))){setTimeout(()=>{autoCompletarCredenciales();},1500);}}}catch(e){console.warn('Mensaje no reconocido o inválido:',event.data);}}
+function autoCompletarCredenciales(){const iframe=document.getElementById('login-frame');if(APP_STATE.intentosAutocompletado>=CONFIG.INTELIGENCIA.intentosMaximos){console.warn('Máximo de intentos de autocompletado alcanzado');return;}APP_STATE.intentosAutocompletado++;try{const iframeDoc=iframe.contentDocument||iframe.contentWindow.document;const encontrarCampo=strategies=>{for(const strategy of strategies){const field=strategy(iframeDoc);if(field)return field;}return null;};const emailStrategies=[doc=>doc.querySelector('input[type="email"]'),doc=>doc.querySelector('input[type="text"][name*="mail"i]'),doc=>doc.querySelector('input[name="email"],input[name="username"],input[name="user"]'),doc=>doc.querySelector('input[placeholder*="mail"i],input[placeholder*="usuario"i]'),doc=>doc.querySelector('input#email,input#username,input#user')];const passwordStrategies=[doc=>doc.querySelector('input[type="password"]'),doc=>doc.querySelector('input[name="password"],input[name="pass"]'),doc=>doc.querySelector('input[placeholder*="contraseña"i],input[placeholder*="password"i]'),doc=>doc.querySelector('input#password,input#pass')];const emailField=encontrarCampo(emailStrategies);const passwordField=encontrarCampo(passwordStrategies);if(emailField&&passwordField){emailField.value=CONFIG.CREDENCIALES.email;passwordField.value=CONFIG.CREDENCIALES.password;const inputEvent=new Event('input',{bubbles:true});const changeEvent=new Event('change',{bubbles:true});emailField.dispatchEvent(inputEvent);emailField.dispatchEvent(changeEvent);passwordField.dispatchEvent(inputEvent);passwordField.dispatchEvent(changeEvent);const submitButton=iframeDoc.querySelector('button[type="submit"],input[type="submit"]');if(submitButton){submitButton.focus();}else{passwordField.focus();}APP_STATE.intentosAutocompletado=0;console.log('Credenciales autocompletadas con éxito');}else{console.warn('No se encontraron todos los campos necesarios');if(APP_STATE.intentosAutocompletado<CONFIG.INTELIGENCIA.intentosMaximos){setTimeout(()=>{autoCompletarCredenciales();},CONFIG.INTELIGENCIA.delayEntreIntentos);}}}catch(e){console.error('Error al autocompletar:',e);}}
+function cargarRecursosAdelantados(){CONFIG.URLS_PREFETCH.forEach(url=>{const el=url.endsWith('.css')?document.createElement('link'):document.createElement('script');if(url.endsWith('.css')){el.rel='stylesheet';el.href=url;el.crossOrigin='anonymous';document.head.appendChild(el);}else{el.src=url;el.async=true;el.defer=true;document.body.appendChild(el);}});}
+function detectarVelocidadConexion(){if('connection'in navigator){const connection=navigator.connection;if(connection.effectiveType){APP_STATE.performanceMetrics.velocidadConexion=connection.effectiveType;if(connection.effectiveType.includes('2g')||connection.saveData){console.log('Conexión lenta detectada, optimizando recursos...');CONFIG.URLS_PREFETCH=CONFIG.URLS_PREFETCH.filter(url=>url.includes('login.css'));}}if('addEventListener'in connection){connection.addEventListener('change',detectarVelocidadConexion);}}}
+function iniciarMedicionMemoria(){if('memory'in performance){APP_STATE.performanceMetrics.memoriaUsada=performance.memory.usedJSHeapSize;}}
+function configurarToolbox(){const toolbox=document.getElementById('floatingToolbox');const toolboxBtn=document.getElementById('toolboxMainBtn');const toolboxOptions=document.getElementById('toolboxOptions');const colorChangeBtn=document.getElementById('colorChangeBtn');const opacityBtn=document.getElementById('opacityBtn');toolboxBtn.addEventListener('click',function(e){e.stopPropagation();APP_STATE.toolboxExpanded=!APP_STATE.toolboxExpanded;if(APP_STATE.toolboxExpanded){toolboxBtn.classList.remove('collapsed');toolboxBtn.classList.add('expanded');toolboxOptions.classList.add('visible');toolboxBtn.setAttribute('aria-expanded','true');}else{toolboxBtn.classList.remove('expanded');toolboxBtn.classList.add('collapsed');toolboxOptions.classList.remove('visible');toolboxBtn.setAttribute('aria-expanded','false');}});colorChangeBtn.addEventListener('click',function(){APP_STATE.toolboxColorIndex=(APP_STATE.toolboxColorIndex+1)%CONFIG.COLORES_TOOLBOX.length;const newColor=CONFIG.COLORES_TOOLBOX[APP_STATE.toolboxColorIndex];toolbox.style.setProperty('--toolbox-color',newColor);});opacityBtn.addEventListener('click',function(){APP_STATE.toolboxOpacity=APP_STATE.toolboxOpacity===0.9?0.6:APP_STATE.toolboxOpacity===0.6?0.3:0.9;toolbox.style.opacity=APP_STATE.toolboxOpacity;});toolbox.addEventListener('mousedown',function(e){if(e.target===toolbox||e.target===toolboxBtn){APP_STATE.toolboxDragging=true;APP_STATE.toolboxOffset.x=e.clientX-toolbox.getBoundingClientRect().left;APP_STATE.toolboxOffset.y=e.clientY-toolbox.getBoundingClientRect().top;toolbox.style.cursor='grabbing';}});document.addEventListener('mousemove',function(e){if(APP_STATE.toolboxDragging){const x=e.clientX-APP_STATE.toolboxOffset.x;const y=e.clientY-APP_STATE.toolboxOffset.y;toolbox.style.left=`${x}px`;toolbox.style.top=`${y}px`;toolbox.style.right='auto';toolbox.style.bottom='auto';}});document.addEventListener('mouseup',function(){APP_STATE.toolboxDragging=false;toolbox.style.cursor='move';});document.addEventListener('click',function(e){if(!e.target.closest('.floating-toolbox')&&APP_STATE.toolboxExpanded){toolboxBtn.classList.remove('expanded');toolboxBtn.classList.add('collapsed');toolboxOptions.classList.remove('visible');toolboxBtn.setAttribute('aria-expanded','false');APP_STATE.toolboxExpanded=false;}});toolbox.addEventListener('dblclick',function(){toolbox.style.left='auto';toolbox.style.top='auto';toolbox.style.right='20px';toolbox.style.bottom='20px';});}
+function configurarControles(){const modal=document.getElementById('externalNavModal');const openModalBtn=document.getElementById('externalNavBtn');const closeModalBtn=document.getElementById('modalClose');const cancelBtn=document.getElementById('cancelNav');const confirmBtn=document.getElementById('confirmNav');const urlInput=document.getElementById('externalUrl');const suggestionsContainer=document.getElementById('urlSuggestions');openModalBtn.addEventListener('click',()=>{modal.style.display='flex';document.getElementById('externalUrl').focus();});const closeModal=()=>{modal.style.display='none';urlInput.value='';suggestionsContainer.style.display='none';};closeModalBtn.addEventListener('click',closeModal);cancelBtn.addEventListener('click',closeModal);confirmBtn.addEventListener('click',()=>{let url=urlInput.value.trim();if(!url){urlInput.setCustomValidity('Por favor ingrese una URL válida');urlInput.reportValidity();return;}if(!url.startsWith('http://')&&!url.startsWith('https://')){url='https://'+url;}try{new URL(url);const domain=new URL(url).hostname;const isAllowed=CONFIG.DOMINIOS_PERMITIDOS.some(allowed=>domain===allowed||domain.endsWith('.'+allowed));if(!isAllowed){if(!confirm(`Está a punto de navegar a ${domain} que no está en la lista de dominios permitidos. ¿Continuar?`)){return;}}APP_STATE.urlHistory.unshift(url);if(APP_STATE.urlHistory.length>5){APP_STATE.urlHistory.pop();}localStorage.setItem('urlHistory',JSON.stringify(APP_STATE.urlHistory));window.open(url,'_blank','noopener,noreferrer');closeModal();}catch(e){urlInput.setCustomValidity('Ingrese una URL válida (ej: https://ejemplo.com)');urlInput.reportValidity();}});urlInput.addEventListener('input',(e)=>{const input=e.target.value.toLowerCase();if(!input){suggestionsContainer.style.display='none';return;}const allSuggestions=[...new Set([...CONFIG.INTELIGENCIA.sugerenciasURL,...APP_STATE.urlHistory])];const filtered=allSuggestions.filter(url=>url.toLowerCase().includes(input));if(filtered.length>0){suggestionsContainer.innerHTML=filtered.map(url=>`<div class="suggestion-item" data-url="${url}">${url}</div>`).join('');suggestionsContainer.style.display='block';document.querySelectorAll('.suggestion-item').forEach(item=>{item.addEventListener('click',()=>{urlInput.value=item.getAttribute('data-url');suggestionsContainer.style.display='none';});});}else{suggestionsContainer.style.display='none';}});modal.addEventListener('click',(e)=>{if(e.target===modal){closeModal();}});document.addEventListener('keydown',(e)=>{if(e.key==='Escape'&&modal.style.display==='flex'){closeModal();}});urlInput.addEventListener('keyup',(e)=>{if(e.key==='Enter'){confirmBtn.click();}});}
+function errorCarga(){manejarErrorCarga();}
+</script>
 </body>
 </html>
